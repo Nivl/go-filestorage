@@ -89,11 +89,7 @@ func (s *GCStorage) Write(src io.Reader, destPath string) error {
 	}
 
 	// Send the changes to GCP
-	if err := dest.Close(); err != nil {
-		return err
-	}
-
-	return nil
+	return dest.Close()
 }
 
 // SetAttributes sets the attributes of the file
