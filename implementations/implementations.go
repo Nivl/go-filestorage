@@ -1,2 +1,2 @@
-// Package implementations contains helpers to help implementating a filestorage
+// Package implementations contains helpers to help implementing a filestorage
 package implementations

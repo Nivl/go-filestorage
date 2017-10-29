@@ -22,7 +22,7 @@ import (
 
 var fileTypes = []string{"image", "raw", "video"}
 
-// cdnrErrorResponse represents the reponse returned by Cloudinary upon error
+// cdnrErrorResponse represents the response returned by Cloudinary upon error
 type cdnrErrorResponse struct {
 	Error struct {
 		Message string `json:"message"`
@@ -35,7 +35,7 @@ type cdnrDeleteResponse struct {
 	Result string `json:"result"`
 }
 
-// cdnrUploadSuccessResponse represents the reponse returned by Cloudinary
+// cdnrUploadSuccessResponse represents the response returned by Cloudinary
 // upon successful upload
 type cdnrUploadSuccessResponse struct {
 	SecureURL string `json:"secure_url"`
