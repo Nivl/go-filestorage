@@ -8,12 +8,6 @@
   version = "v0.10.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/Nivl/go-rest-tools"
-  packages = ["storage/filestorage","storage/filestorage/implementations/cloudinary","storage/filestorage/implementations/fsstorage","storage/filestorage/implementations/gcstorage","storage/filestorage/testfilestorage","storage/fs"]
-  revision = "8b8e90d739d3dce4e535c30cb42e9f361297bac2"
-
-[[projects]]
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
   revision = "346938d642f2ec3594ed81d874461961cd0faa76"
@@ -94,6 +88,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2d1c2480bd8804ce724e74bb1b68b41fa09f12d7988d51568d2cd2f47c011983"
+  inputs-digest = "8ea6b9985f7839b1d4cfb52f08e779a8de3a1faa17f745bc1acd8ba710f50359"
   solver-name = "gps-cdcl"
   solver-version = 1
