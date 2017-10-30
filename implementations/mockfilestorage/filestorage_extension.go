@@ -20,61 +20,61 @@ var (
 	AnyType = gomock.Any()
 )
 
-// ExpectWriteIfNotExist is an helper that expects a WriteIfNotExist to
+// WriteIfNotExistSuccess is an helper that expects a WriteIfNotExist to
 // succeed with the provided params
-func (s *MockFileStorage) ExpectWriteIfNotExist(isNew bool, url string) *gomock.Call {
-	return s.EXPECT().WriteIfNotExist(AnyType, StringType).Return(isNew, url, nil)
+func (mr *MockFileStorageMockRecorder) WriteIfNotExistSuccess(isNew bool, url string) *gomock.Call {
+	return mr.WriteIfNotExist(AnyType, StringType).Return(isNew, url, nil).Times(1)
 }
 
-// ExpectWriteIfNotExistError is an helper that expects a WriteIfNotExist to
+// WriteIfNotExistError is an helper that expects a WriteIfNotExist to
 // fail
-func (s *MockFileStorage) ExpectWriteIfNotExistError() *gomock.Call {
-	call := s.EXPECT().WriteIfNotExist(AnyType, StringType)
+func (mr *MockFileStorageMockRecorder) WriteIfNotExistError() *gomock.Call {
+	call := mr.WriteIfNotExist(AnyType, StringType)
 	call.Return(false, "", errors.New("server unreachable"))
-	return call
+	return call.Times(1)
 }
 
-// ExpectRead is an helper that expects a Read
-func (s *MockFileStorage) ExpectRead(cwd, filename string) *gomock.Call {
+// ReadSuccess is an helper that expects a Read that succeed
+func (mr *MockFileStorageMockRecorder) ReadSuccess(cwd, filename string) *gomock.Call {
 	filePath := path.Join(cwd, "fixtures", filename)
-	return s.EXPECT().Read(StringType).Return(os.Open(filePath))
+	return mr.Read(StringType).Return(os.Open(filePath)).Times(1)
 }
 
-// ExpectExists is an helper that expects Exists() to return true
-func (s *MockFileStorage) ExpectExists() *gomock.Call {
-	return s.EXPECT().Exists(StringType).Return(true, nil)
+// ExistsSuccess is an helper that expects Exists() to return true
+func (mr *MockFileStorageMockRecorder) ExistsSuccess() *gomock.Call {
+	return mr.Exists(StringType).Return(true, nil).Times(1)
 }
 
-// ExpectNotExists is an helper that expects Exists() to return false
-func (s *MockFileStorage) ExpectNotExists() *gomock.Call {
-	return s.EXPECT().Exists(StringType).Return(false, nil)
+// NotExistsSuccess is an helper that expects Exists() to return false
+func (mr *MockFileStorageMockRecorder) NotExistsSuccess() *gomock.Call {
+	return mr.Exists(StringType).Return(false, nil).Times(1)
 }
 
-// ExpectURL is an helper that expects URL() to return given param
-func (s *MockFileStorage) ExpectURL(url string) *gomock.Call {
-	return s.EXPECT().URL(StringType).Return(url, nil)
+// URLSuccess is an helper that expects URL() to return given param
+func (mr *MockFileStorageMockRecorder) URLSuccess(url string) *gomock.Call {
+	return mr.URL(StringType).Return(url, nil).Times(1)
 }
 
-// ExpectSetAttributes is an helper that expects SetAttributes() to work,
-// and returns an empty content
-func (s *MockFileStorage) ExpectSetAttributes() *gomock.Call {
+// SetAttributesSuccess is an helper that expects SetAttributes() to work,
+// and to return an empty content
+func (mr *MockFileStorageMockRecorder) SetAttributesSuccess() *gomock.Call {
 	attrs := &filestorage.FileAttributes{}
-	return s.EXPECT().SetAttributes(StringType, UpdatableAttrType).Return(attrs, nil)
+	return mr.SetAttributes(StringType, UpdatableAttrType).Return(attrs, nil).Times(1)
 }
 
-// ExpectSetAttributesRet is an helper that expects SetAttributes() to
+// SetAttributesRetSuccess is an helper that expects SetAttributes() to
 // return the provided object
-func (s *MockFileStorage) ExpectSetAttributesRet(attrs *filestorage.FileAttributes) *gomock.Call {
-	return s.EXPECT().SetAttributes(StringType, UpdatableAttrType).Return(attrs, nil)
+func (mr *MockFileStorageMockRecorder) SetAttributesRetSuccess(attrs *filestorage.FileAttributes) *gomock.Call {
+	return mr.SetAttributes(StringType, UpdatableAttrType).Return(attrs, nil).Times(1)
 }
 
-// ExpectAttributes is an helper that expects Attributes() to
+// AttributesSuccess is an helper that expects Attributes() to
 // return the provided object
-func (s *MockFileStorage) ExpectAttributes(attrs *filestorage.FileAttributes) *gomock.Call {
-	return s.EXPECT().Attributes(StringType).Return(attrs, nil)
+func (mr *MockFileStorageMockRecorder) AttributesSuccess(attrs *filestorage.FileAttributes) *gomock.Call {
+	return mr.Attributes(StringType).Return(attrs, nil).Times(1)
 }
 
-// ExpectDelete is an helper that expects Delete() to succeed
-func (s *MockFileStorage) ExpectDelete() *gomock.Call {
-	return s.EXPECT().Delete(StringType).Return(nil)
+// DeleteSuccess is an helper that expects Delete() to succeed
+func (mr *MockFileStorageMockRecorder) DeleteSuccess() *gomock.Call {
+	return mr.Delete(StringType).Return(nil).Times(1)
 }
