@@ -5,7 +5,7 @@
 package mockfilestorage
 
 import (
-	filestorage "github.com/Nivl/go-filestorage"
+	go_filestorage "github.com/Nivl/go-filestorage"
 	gomock "github.com/golang/mock/gomock"
 	io "io"
 	reflect "reflect"
@@ -35,9 +35,9 @@ func (m *MockFileStorage) EXPECT() *MockFileStorageMockRecorder {
 }
 
 // Attributes mocks base method
-func (m *MockFileStorage) Attributes(arg0 string) (*filestorage.FileAttributes, error) {
+func (m *MockFileStorage) Attributes(arg0 string) (*go_filestorage.FileAttributes, error) {
 	ret := m.ctrl.Call(m, "Attributes", arg0)
-	ret0, _ := ret[0].(*filestorage.FileAttributes)
+	ret0, _ := ret[0].(*go_filestorage.FileAttributes)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -98,9 +98,9 @@ func (mr *MockFileStorageMockRecorder) Read(arg0 interface{}) *gomock.Call {
 }
 
 // SetAttributes mocks base method
-func (m *MockFileStorage) SetAttributes(arg0 string, arg1 *filestorage.UpdatableFileAttributes) (*filestorage.FileAttributes, error) {
+func (m *MockFileStorage) SetAttributes(arg0 string, arg1 *go_filestorage.UpdatableFileAttributes) (*go_filestorage.FileAttributes, error) {
 	ret := m.ctrl.Call(m, "SetAttributes", arg0, arg1)
-	ret0, _ := ret[0].(*filestorage.FileAttributes)
+	ret0, _ := ret[0].(*go_filestorage.FileAttributes)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

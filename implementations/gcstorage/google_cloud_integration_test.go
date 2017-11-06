@@ -1,7 +1,6 @@
 package gcstorage_test
 
 import (
-	"context"
 	"os"
 	"testing"
 
@@ -17,8 +16,7 @@ func TestGCStorageUploadHappyPath(t *testing.T) {
 	apiKey := os.Getenv("GCP_API_KEY")
 	bucket := os.Getenv("GCP_BUCKET")
 
-	ctx := context.Background()
-	storage, err := gcstorage.New(ctx, apiKey)
+	storage, err := gcstorage.New(apiKey)
 	if err != nil {
 		t.Fatal(err)
 	}
