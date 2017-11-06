@@ -1,8 +1,6 @@
 package fsstorage
 
 import (
-	"context"
-
 	"github.com/Nivl/go-filestorage"
 )
 
@@ -11,14 +9,22 @@ var _ filestorage.Creator = (*Creator)(nil)
 
 // NewCreator returns a filestorage creator that will use the provided keys
 // to create a new cloudinary driver for each single logger
-func NewCreator() *Creator {
-	return &Creator{}
+func NewCreator(defaultBucket string) *Creator {
+	return &Creator{
+		defaultBucket: defaultBucket,
+	}
 }
 
 // Creator creates new filestorage
-type Creator struct{}
+type Creator struct {
+	defaultBucket string
+}
 
 // New returns a new le client
-func (c *Creator) New(ctx context.Context) (filestorage.FileStorage, error) {
-	return New()
+func (c *Creator) New() (filestorage.FileStorage, error) {
+	fs, err := New()
+	if err != nil {
+		return nil, err
+	}
+	return fs, fs.SetBucket(c.defaultBucket)
 }
