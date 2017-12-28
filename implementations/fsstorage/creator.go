@@ -20,7 +20,7 @@ type Creator struct {
 	defaultBucket string
 }
 
-// New returns a new le client
+// New returns a new fs client
 func (c *Creator) New() (filestorage.FileStorage, error) {
 	fs, err := New()
 	if err != nil {

@@ -34,14 +34,14 @@ func (m *MockCreator) EXPECT() *MockCreatorMockRecorder {
 }
 
 // New mocks base method
-func (m *MockCreator) New(arg0 string) (go_filestorage.FileStorage, error) {
-	ret := m.ctrl.Call(m, "New", arg0)
+func (m *MockCreator) New() (go_filestorage.FileStorage, error) {
+	ret := m.ctrl.Call(m, "New")
 	ret0, _ := ret[0].(go_filestorage.FileStorage)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // New indicates an expected call of New
-func (mr *MockCreatorMockRecorder) New(arg0 interface{}) *gomock.Call {
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "New", reflect.TypeOf((*MockCreator)(nil).New), arg0)
+func (mr *MockCreatorMockRecorder) New() *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "New", reflect.TypeOf((*MockCreator)(nil).New))
 }

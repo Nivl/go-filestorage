@@ -2,6 +2,7 @@ package cloudinary
 
 import (
 	"bytes"
+	"context"
 	"crypto/sha1"
 	"encoding/json"
 	"errors"
@@ -43,9 +44,16 @@ type cdnrUploadSuccessResponse struct {
 
 // New returns a new instance of a Cloudinary Storage
 func New(apiKey, secret string) *Cloudinary {
+	return NewWithContext(context.Background(), apiKey, secret)
+}
+
+// NewWithContext returns a new instance of a Cloudinary Storage
+// attached to the provided context
+func NewWithContext(ctx context.Context, apiKey, secret string) *Cloudinary {
 	return &Cloudinary{
 		apiKey: apiKey,
 		secret: secret,
+		ctx:    ctx,
 		cache:  map[string]string{},
 	}
 }
@@ -67,6 +75,7 @@ type Cloudinary struct {
 	cache     map[string]string
 	apiKey    string
 	secret    string
+	ctx       context.Context
 	cloudName string // bucket
 }
 
@@ -95,10 +104,16 @@ func (s *Cloudinary) resBaseURL(typ string) string {
 }
 
 // URL returns the URL of the file
+// Will use the defaut context
+func (s *Cloudinary) URL(filepath string) (string, error) {
+	return s.URLCtx(s.ctx, filepath)
+}
+
+// URLCtx returns the URL of the file
 // Because Cloudinary forces to have the file type in the URL, this
 // method tries to download the file using each types until it finds the
 // right URL
-func (s *Cloudinary) URL(filepath string) (string, error) {
+func (s *Cloudinary) URLCtx(ctx context.Context, filepath string) (string, error) {
 	url, found := s.cache[filepath]
 	if found {
 		return url, nil
@@ -124,9 +139,15 @@ func (s *Cloudinary) URL(filepath string) (string, error) {
 }
 
 // Read fetches a file a returns a reader
+// Will use the defaut context
+func (s *Cloudinary) Read(filepath string) (io.ReadCloser, error) {
+	return s.ReadCtx(s.ctx, filepath)
+}
+
+// ReadCtx fetches a file a returns a reader
 // Because Cloudinary forces to have the file type in the URL, this
 // method brutforces on all the possible types
-func (s *Cloudinary) Read(filepath string) (io.ReadCloser, error) {
+func (s *Cloudinary) ReadCtx(ctx context.Context, filepath string) (io.ReadCloser, error) {
 	for _, typ := range fileTypes {
 		url := fmt.Sprintf("%s/upload/%s", s.resBaseURL(typ), filepath)
 		resp, err := s.read(url)
@@ -169,7 +190,13 @@ func (s *Cloudinary) read(url string) (io.ReadCloser, error) {
 }
 
 // Exists check if a file exists
+// Will use the defaut context
 func (s *Cloudinary) Exists(filepath string) (bool, error) {
+	return s.ExistsCtx(s.ctx, filepath)
+}
+
+// ExistsCtx check if a file exists
+func (s *Cloudinary) ExistsCtx(ctx context.Context, filepath string) (bool, error) {
 	r, err := s.Read(filepath)
 	if err == nil {
 		r.Close()
@@ -181,10 +208,16 @@ func (s *Cloudinary) Exists(filepath string) (bool, error) {
 	return false, err
 }
 
-// Delete removes a file
+// Delete removes a file, ignores files that do not exist
+// Will use the defaut context
+func (s *Cloudinary) Delete(filepath string) error {
+	return s.DeleteCtx(s.ctx, filepath)
+}
+
+// DeleteCtx removes a file
 // Because Cloudinary forces to have the file type in the URL, this
 // method brutforces on all the possible types
-func (s *Cloudinary) Delete(filepath string) error {
+func (s *Cloudinary) DeleteCtx(ctx context.Context, filepath string) error {
 	signature, timestamp := s.signature(filepath, true)
 	form := url.Values{
 		"api_key":    []string{s.apiKey},
@@ -254,7 +287,13 @@ func (s *Cloudinary) execDelete(endpointURL string, body io.Reader) error {
 }
 
 // Write copy the provided os.File to dest
+// Will use the defaut context
 func (s *Cloudinary) Write(src io.Reader, destPath string) error {
+	return s.WriteCtx(s.ctx, src, destPath)
+}
+
+// WriteCtx copy the provided os.File to dest
+func (s *Cloudinary) WriteCtx(ctx context.Context, src io.Reader, destPath string) error {
 	endpointURL := fmt.Sprintf("%s/upload", s.apiBaseURL("auto"))
 
 	// REQUEST
@@ -316,12 +355,24 @@ func (s *Cloudinary) Write(src io.Reader, destPath string) error {
 }
 
 // SetAttributes sets the attributes of the file
+// Will use the defaut context
 func (s *Cloudinary) SetAttributes(filepath string, attrs *filestorage.UpdatableFileAttributes) (*filestorage.FileAttributes, error) {
+	return s.SetAttributesCtx(s.ctx, filepath, attrs)
+}
+
+// SetAttributesCtx sets the attributes of the file
+func (s *Cloudinary) SetAttributesCtx(ctx context.Context, filepath string, attrs *filestorage.UpdatableFileAttributes) (*filestorage.FileAttributes, error) {
 	return filestorage.NewFileAttributesFromUpdatable(attrs), nil
 }
 
 // Attributes returns the attributes of the file
+// Will use the defaut context
 func (s *Cloudinary) Attributes(filepath string) (*filestorage.FileAttributes, error) {
+	return s.AttributesCtx(s.ctx, filepath)
+}
+
+// AttributesCtx returns the attributes of the file
+func (s *Cloudinary) AttributesCtx(ctx context.Context, filepath string) (*filestorage.FileAttributes, error) {
 	return &filestorage.FileAttributes{}, nil
 }
 
@@ -332,6 +383,18 @@ func (s *Cloudinary) Attributes(filepath string) (*filestorage.FileAttributes, e
 //     existed (false).
 //   - A URL to the uploaded file
 //   - An error if something went wrong
+// Will use the defaut context
 func (s *Cloudinary) WriteIfNotExist(src io.Reader, destPath string) (new bool, url string, err error) {
-	return implementations.WriteIfNotExist(s, src, destPath)
+	return s.WriteIfNotExistCtx(s.ctx, src, destPath)
+}
+
+// WriteIfNotExistCtx copies the provided io.Reader to dest if the file does
+// not already exist
+// Returns:
+//   - A boolean specifying if the file got uploaded (true) or if already
+//     existed (false).
+//   - A URL to the uploaded file
+//   - An error if something went wrong
+func (s *Cloudinary) WriteIfNotExistCtx(ctx context.Context, src io.Reader, destPath string) (new bool, url string, err error) {
+	return implementations.WriteIfNotExist(ctx, s, src, destPath)
 }
