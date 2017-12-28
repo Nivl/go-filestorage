@@ -1,6 +1,9 @@
 package fsstorage
 
 import (
+	"context"
+	"io/ioutil"
+
 	"github.com/Nivl/go-filestorage"
 )
 
@@ -22,7 +25,22 @@ type Creator struct {
 
 // New returns a new fs client
 func (c *Creator) New() (filestorage.FileStorage, error) {
-	fs, err := New()
+	fs, err := NewWithDir(c.defaultBucket)
+	if err != nil {
+		return nil, err
+	}
+	return fs, fs.SetBucket(c.defaultBucket)
+}
+
+// NewWithContext returns a new gc storage client using the provided context as
+// default context
+func (c *Creator) NewWithContext(ctx context.Context) (filestorage.FileStorage, error) {
+	dir, err := ioutil.TempDir("", "storage")
+	if err != nil {
+		return nil, err
+	}
+
+	fs, err := NewWithContext(ctx, dir)
 	if err != nil {
 		return nil, err
 	}

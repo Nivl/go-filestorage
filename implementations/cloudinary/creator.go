@@ -1,6 +1,8 @@
 package cloudinary
 
 import (
+	"context"
+
 	"github.com/Nivl/go-filestorage"
 )
 
@@ -27,5 +29,13 @@ type Creator struct {
 // New returns a new le client
 func (c *Creator) New() (filestorage.FileStorage, error) {
 	fs := New(c.apiKey, c.secret)
+	return fs, fs.SetBucket(c.defaultBucket)
+}
+
+// NewWithContext returns a new gc storage client using the provided context as
+// default context instead of the one provided during the creation of the
+// Creator
+func (c *Creator) NewWithContext(ctx context.Context) (filestorage.FileStorage, error) {
+	fs := NewWithContext(ctx, c.apiKey, c.secret)
 	return fs, fs.SetBucket(c.defaultBucket)
 }
