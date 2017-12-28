@@ -5,6 +5,7 @@
 package mockfilestorage
 
 import (
+	context "context"
 	go_filestorage "github.com/Nivl/go-filestorage"
 	gomock "github.com/golang/mock/gomock"
 	io "io"
@@ -47,6 +48,19 @@ func (mr *MockFileStorageMockRecorder) Attributes(arg0 interface{}) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Attributes", reflect.TypeOf((*MockFileStorage)(nil).Attributes), arg0)
 }
 
+// AttributesCtx mocks base method
+func (m *MockFileStorage) AttributesCtx(arg0 context.Context, arg1 string) (*go_filestorage.FileAttributes, error) {
+	ret := m.ctrl.Call(m, "AttributesCtx", arg0, arg1)
+	ret0, _ := ret[0].(*go_filestorage.FileAttributes)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AttributesCtx indicates an expected call of AttributesCtx
+func (mr *MockFileStorageMockRecorder) AttributesCtx(arg0, arg1 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AttributesCtx", reflect.TypeOf((*MockFileStorage)(nil).AttributesCtx), arg0, arg1)
+}
+
 // Delete mocks base method
 func (m *MockFileStorage) Delete(arg0 string) error {
 	ret := m.ctrl.Call(m, "Delete", arg0)
@@ -57,6 +71,18 @@ func (m *MockFileStorage) Delete(arg0 string) error {
 // Delete indicates an expected call of Delete
 func (mr *MockFileStorageMockRecorder) Delete(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockFileStorage)(nil).Delete), arg0)
+}
+
+// DeleteCtx mocks base method
+func (m *MockFileStorage) DeleteCtx(arg0 context.Context, arg1 string) error {
+	ret := m.ctrl.Call(m, "DeleteCtx", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteCtx indicates an expected call of DeleteCtx
+func (mr *MockFileStorageMockRecorder) DeleteCtx(arg0, arg1 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteCtx", reflect.TypeOf((*MockFileStorage)(nil).DeleteCtx), arg0, arg1)
 }
 
 // Exists mocks base method
@@ -70,6 +96,19 @@ func (m *MockFileStorage) Exists(arg0 string) (bool, error) {
 // Exists indicates an expected call of Exists
 func (mr *MockFileStorageMockRecorder) Exists(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Exists", reflect.TypeOf((*MockFileStorage)(nil).Exists), arg0)
+}
+
+// ExistsCtx mocks base method
+func (m *MockFileStorage) ExistsCtx(arg0 context.Context, arg1 string) (bool, error) {
+	ret := m.ctrl.Call(m, "ExistsCtx", arg0, arg1)
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ExistsCtx indicates an expected call of ExistsCtx
+func (mr *MockFileStorageMockRecorder) ExistsCtx(arg0, arg1 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ExistsCtx", reflect.TypeOf((*MockFileStorage)(nil).ExistsCtx), arg0, arg1)
 }
 
 // ID mocks base method
@@ -97,6 +136,19 @@ func (mr *MockFileStorageMockRecorder) Read(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Read", reflect.TypeOf((*MockFileStorage)(nil).Read), arg0)
 }
 
+// ReadCtx mocks base method
+func (m *MockFileStorage) ReadCtx(arg0 context.Context, arg1 string) (io.ReadCloser, error) {
+	ret := m.ctrl.Call(m, "ReadCtx", arg0, arg1)
+	ret0, _ := ret[0].(io.ReadCloser)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ReadCtx indicates an expected call of ReadCtx
+func (mr *MockFileStorageMockRecorder) ReadCtx(arg0, arg1 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadCtx", reflect.TypeOf((*MockFileStorage)(nil).ReadCtx), arg0, arg1)
+}
+
 // SetAttributes mocks base method
 func (m *MockFileStorage) SetAttributes(arg0 string, arg1 *go_filestorage.UpdatableFileAttributes) (*go_filestorage.FileAttributes, error) {
 	ret := m.ctrl.Call(m, "SetAttributes", arg0, arg1)
@@ -108,6 +160,19 @@ func (m *MockFileStorage) SetAttributes(arg0 string, arg1 *go_filestorage.Updata
 // SetAttributes indicates an expected call of SetAttributes
 func (mr *MockFileStorageMockRecorder) SetAttributes(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetAttributes", reflect.TypeOf((*MockFileStorage)(nil).SetAttributes), arg0, arg1)
+}
+
+// SetAttributesCtx mocks base method
+func (m *MockFileStorage) SetAttributesCtx(arg0 context.Context, arg1 string, arg2 *go_filestorage.UpdatableFileAttributes) (*go_filestorage.FileAttributes, error) {
+	ret := m.ctrl.Call(m, "SetAttributesCtx", arg0, arg1, arg2)
+	ret0, _ := ret[0].(*go_filestorage.FileAttributes)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SetAttributesCtx indicates an expected call of SetAttributesCtx
+func (mr *MockFileStorageMockRecorder) SetAttributesCtx(arg0, arg1, arg2 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetAttributesCtx", reflect.TypeOf((*MockFileStorage)(nil).SetAttributesCtx), arg0, arg1, arg2)
 }
 
 // SetBucket mocks base method
@@ -135,6 +200,19 @@ func (mr *MockFileStorageMockRecorder) URL(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "URL", reflect.TypeOf((*MockFileStorage)(nil).URL), arg0)
 }
 
+// URLCtx mocks base method
+func (m *MockFileStorage) URLCtx(arg0 context.Context, arg1 string) (string, error) {
+	ret := m.ctrl.Call(m, "URLCtx", arg0, arg1)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// URLCtx indicates an expected call of URLCtx
+func (mr *MockFileStorageMockRecorder) URLCtx(arg0, arg1 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "URLCtx", reflect.TypeOf((*MockFileStorage)(nil).URLCtx), arg0, arg1)
+}
+
 // Write mocks base method
 func (m *MockFileStorage) Write(arg0 io.Reader, arg1 string) error {
 	ret := m.ctrl.Call(m, "Write", arg0, arg1)
@@ -145,6 +223,18 @@ func (m *MockFileStorage) Write(arg0 io.Reader, arg1 string) error {
 // Write indicates an expected call of Write
 func (mr *MockFileStorageMockRecorder) Write(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Write", reflect.TypeOf((*MockFileStorage)(nil).Write), arg0, arg1)
+}
+
+// WriteCtx mocks base method
+func (m *MockFileStorage) WriteCtx(arg0 context.Context, arg1 io.Reader, arg2 string) error {
+	ret := m.ctrl.Call(m, "WriteCtx", arg0, arg1, arg2)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// WriteCtx indicates an expected call of WriteCtx
+func (mr *MockFileStorageMockRecorder) WriteCtx(arg0, arg1, arg2 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteCtx", reflect.TypeOf((*MockFileStorage)(nil).WriteCtx), arg0, arg1, arg2)
 }
 
 // WriteIfNotExist mocks base method
@@ -159,4 +249,18 @@ func (m *MockFileStorage) WriteIfNotExist(arg0 io.Reader, arg1 string) (bool, st
 // WriteIfNotExist indicates an expected call of WriteIfNotExist
 func (mr *MockFileStorageMockRecorder) WriteIfNotExist(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteIfNotExist", reflect.TypeOf((*MockFileStorage)(nil).WriteIfNotExist), arg0, arg1)
+}
+
+// WriteIfNotExistCtx mocks base method
+func (m *MockFileStorage) WriteIfNotExistCtx(arg0 context.Context, arg1 io.Reader, arg2 string) (bool, string, error) {
+	ret := m.ctrl.Call(m, "WriteIfNotExistCtx", arg0, arg1, arg2)
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(string)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// WriteIfNotExistCtx indicates an expected call of WriteIfNotExistCtx
+func (mr *MockFileStorageMockRecorder) WriteIfNotExistCtx(arg0, arg1, arg2 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteIfNotExistCtx", reflect.TypeOf((*MockFileStorage)(nil).WriteIfNotExistCtx), arg0, arg1, arg2)
 }
