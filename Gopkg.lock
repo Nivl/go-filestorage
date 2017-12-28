@@ -23,7 +23,7 @@
   branch = "master"
   name = "github.com/golang/protobuf"
   packages = ["proto","protoc-gen-go/descriptor","ptypes","ptypes/any","ptypes/duration","ptypes/timestamp"]
-  revision = "1643683e1b54a9e88ad26d98f81400c8c9d9f4f9"
+  revision = "1e59b77b52bf8e4b449a57e6f79f21226d571845"
 
 [[projects]]
   name = "github.com/googleapis/gax-go"
@@ -47,25 +47,25 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context","context/ctxhttp","http2","http2/hpack","idna","internal/timeseries","lex/httplex","trace"]
-  revision = "c73622c77280266305273cb545f54516ced95b93"
+  revision = "d866cfc389cec985d6fda2859936a575a55a3ab6"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/oauth2"
   packages = [".","google","internal","jws","jwt"]
-  revision = "bb50c06baba3d0c76f9d125c0719093e315b5b44"
+  revision = "197281d4e0ecd78c33865daf9c6e51626feefcb2"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/text"
   packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable"]
-  revision = "6eab0e8f74e86c598ec3b6fad4888e0c11482d48"
+  revision = "e19ae1496984b1c655b8044a65c0300a3c878dd3"
 
 [[projects]]
   branch = "master"
   name = "google.golang.org/api"
   packages = ["gensupport","googleapi","googleapi/internal/uritemplates","googleapi/transport","internal","iterator","option","storage/v1","transport","transport/grpc","transport/http"]
-  revision = "6f1bb5bc3019b5a6c3bd4e9812215dc36dcdb350"
+  revision = "272e2963aad1a56aba54e1167c47abff8d37ac08"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -77,13 +77,13 @@
   branch = "master"
   name = "google.golang.org/genproto"
   packages = ["googleapis/api/annotations","googleapis/iam/v1","googleapis/rpc/status"]
-  revision = "f676e0f3ac6395ff1a529ae59a6670878a8371a6"
+  revision = "a8101f21cf983e773d0c1133ebc5424792003214"
 
 [[projects]]
   name = "google.golang.org/grpc"
-  packages = [".","balancer","codes","connectivity","credentials","credentials/oauth","grpclb/grpc_lb_v1/messages","grpclog","internal","keepalive","metadata","naming","peer","resolver","stats","status","tap","transport"]
-  revision = "61d37c5d657a47e4404fd6823bd598341a2595de"
-  version = "v1.7.1"
+  packages = [".","balancer","balancer/roundrobin","codes","connectivity","credentials","credentials/oauth","encoding","grpclb/grpc_lb_v1/messages","grpclog","internal","keepalive","metadata","naming","peer","resolver","resolver/dns","resolver/passthrough","stats","status","tap","transport"]
+  revision = "e687fa4e6424368ece6e4fe727cea2c806a0fcb4"
+  version = "v1.8.2"
 
 [solve-meta]
   analyzer-name = "dep"
