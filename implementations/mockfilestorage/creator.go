@@ -5,6 +5,7 @@
 package mockfilestorage
 
 import (
+	context "context"
 	go_filestorage "github.com/Nivl/go-filestorage"
 	gomock "github.com/golang/mock/gomock"
 	reflect "reflect"
@@ -44,4 +45,17 @@ func (m *MockCreator) New() (go_filestorage.FileStorage, error) {
 // New indicates an expected call of New
 func (mr *MockCreatorMockRecorder) New() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "New", reflect.TypeOf((*MockCreator)(nil).New))
+}
+
+// NewWithContext mocks base method
+func (m *MockCreator) NewWithContext(arg0 context.Context) (go_filestorage.FileStorage, error) {
+	ret := m.ctrl.Call(m, "NewWithContext", arg0)
+	ret0, _ := ret[0].(go_filestorage.FileStorage)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// NewWithContext indicates an expected call of NewWithContext
+func (mr *MockCreatorMockRecorder) NewWithContext(arg0 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewWithContext", reflect.TypeOf((*MockCreator)(nil).NewWithContext), arg0)
 }
